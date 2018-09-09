@@ -265,6 +265,12 @@ class GoogleMapOverlayController {
     );
   }
 
+  void setSize(double width,
+     double height,
+  ) {
+    overlayController.setSize(width, height);
+  }
+
   /// The controller of the GoogleMaps instance.
   final GoogleMapController mapController;
 

@@ -48,8 +48,8 @@ part of google_maps_flutter;
 /// the overlay controller to be added as an observer of the main Navigator.
 class PlatformOverlayController extends NavigatorObserver
     with WidgetsBindingObserver {
-  final double width;
-  final double height;
+  double width;
+  double height;
   final PlatformOverlay overlay;
   final Completer<int> _overlayIdCompleter = new Completer<int>();
   BuildContext _context;
@@ -95,6 +95,14 @@ class PlatformOverlayController extends NavigatorObserver
     WidgetsBinding.instance.removeObserver(this);
     _context = null;
     _routeWithOverlay = null;
+  }
+
+  void setSize(double width,
+      double height,
+      ) {
+    // TODO: Check for and cure side effects (what is the attachTo method doing with the size parameters?)
+    this.width = width;
+    this.height = height;
   }
 
   /// Allow activating the overlay, unless there are other pending calls to
