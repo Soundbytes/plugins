@@ -101,8 +101,14 @@ class PlatformOverlayController extends NavigatorObserver
       double height,
       ) {
     // TODO: Check for and cure side effects (what is the attachTo method doing with the size parameters?)
-    this.width = width;
-    this.height = height;
+
+    if (!_overlayIdCompleter.isCompleted) {
+      this.width = width;
+      this.height = height;
+    } else {
+      if (this.width != width || this.height != height)
+        print('overlay size changed after creation new size: $width, $height old size: ${this.width}, ${this.height}');
+    }
   }
 
   /// Allow activating the overlay, unless there are other pending calls to
