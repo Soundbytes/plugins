@@ -118,7 +118,7 @@ class _LngRange {
   }
 
   bool intersects(_LngRange other) {
-    return isEmpty() || other.isEmpty()
+    return isEmpty() || other == null || other.isEmpty()
         ? false
         : crosses180deg(this)
         ? crosses180deg(other) || other.west <= east || other.east >= west
@@ -208,9 +208,9 @@ class LatLngBounds {
         _lngRange.contains(point.longitude);
   }
 
-  bool intersects(LatLngBounds a) {
-    return _latRange.intersects(a._latRange) &&
-        _lngRange.intersects(a._lngRange);
+  bool intersects(LatLngBounds other) {
+    return _latRange.intersects(other._latRange) &&
+        _lngRange.intersects(other._lngRange);
   }
 
   LatLngBounds extend(LatLng a) {
@@ -219,14 +219,15 @@ class LatLngBounds {
     return this;
   }
 
-  LatLngBounds union(LatLngBounds a) {
-    if (a == null || a.isEmpty()) return this;
-    extend(a.southwest);
-    extend(a.northeast);
+  LatLngBounds union(LatLngBounds other) {
+    if (other == null || other.isEmpty()) return this;
+    extend(other.southwest);
+    extend(other.northeast);
     return this;
   }
 
   bool isEmpty() {
+    assert(_latRange != null && _lngRange != null);
     return _latRange.isEmpty() || _lngRange.isEmpty();
   }
 

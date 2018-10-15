@@ -258,10 +258,10 @@ class GoogleMapOverlayController {
     final GoogleMapOptions effectiveOptions =
         GoogleMapOptions.defaultOptions.copyWith(options);
     final _GoogleMapsPlatformOverlay overlay =
-        new _GoogleMapsPlatformOverlay(effectiveOptions);
-    return new GoogleMapOverlayController._(
-      new GoogleMapController(overlay._textureId.future, effectiveOptions),
-      new PlatformOverlayController(width, height, overlay),
+        _GoogleMapsPlatformOverlay(effectiveOptions);
+    return GoogleMapOverlayController._(
+      GoogleMapController(overlay._textureId.future, effectiveOptions),
+      PlatformOverlayController(width, height, overlay),
     );
   }
 
