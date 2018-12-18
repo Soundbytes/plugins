@@ -54,9 +54,7 @@ class LatLng {
   }
 
   @override
-  String toString() {
-    return '$runtimeType[$latitude, $longitude]';
-  }
+  String toString() => '$runtimeType($latitude, $longitude)';
 
   //Todo: Decide whether it is preferable to accept approximate equality.
   //Todo: find out what tolerances can be accepted.
@@ -264,11 +262,12 @@ class LatLngBounds {
   _LatRange _latRange;
   _LngRange _lngRange;
 
-  dynamic _toJson() {
+  dynamic _toList() {
     return <dynamic>[southWest._toJson(), northEast._toJson()];
   }
 
-  static LatLngBounds _fromJson(dynamic json) {
+  @visibleForTesting
+  static LatLngBounds fromList(dynamic json) {
     if (json == null) {
       return null;
     }
